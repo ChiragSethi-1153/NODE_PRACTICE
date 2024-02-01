@@ -14,7 +14,7 @@ exports.createData = async(payload)=>{
 }
 
 exports.findData = async () => {
-        const users = await Users.find({name: 'xyz'})
+        const users = await Users.find({})
         return users;
 }
 
