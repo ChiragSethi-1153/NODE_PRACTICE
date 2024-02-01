@@ -20,8 +20,8 @@ exports.findData = async () => {
 
 exports.changeData = async (request) => {
     const {id} = request.params;
-    const { name, email, age } = request.body;
-    const users = await Users.findByIdAndUpdate(id, { name, email, age }, { new: true })
+    const { name, email, age, gender, location } = request.body;
+    const users = await Users.findByIdAndUpdate(id, { name, email, age, gender, location }, { new: true })
     return users;
 }
 

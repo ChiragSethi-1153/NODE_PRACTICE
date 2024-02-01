@@ -2,6 +2,7 @@ const {  findData, createData, changeData, deleteData } = require("../services/u
 
 exports.addData =  async(req, res) => { 
     try{    
+        
     const response = await createData(req.body);
         return res.status(201).json(response)
     }
