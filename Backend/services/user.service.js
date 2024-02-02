@@ -1,6 +1,8 @@
 
 const Users = require('../Models/Users')
 require('mongoose-paginate')
+
+
 exports.createData = async(payload)=>{
     const {name, email, age, gender, location} = payload;
     try {
@@ -15,15 +17,21 @@ exports.createData = async(payload)=>{
 
 exports.findData = async (request) => {
         console.log(request.query)
-        let page = Number(request.query.page) || 1;
-        let limit = Number(request.query.limit) || 3;
+        let page = Number(request.query.page);
+        let limit = Number(request.query.limit) || 5;
+        let count = await Users.estimatedDocumentCount({});
+        const pageCount = count / limit
         const users = await Users.find({})
-        .skip(limit * page)
+        .skip(limit * (page-1))
         .limit(limit)
-        .countDocuments()
     
 
-        return users;
+        return {
+            pagination: {
+                count,
+                pageCount
+            },
+            users};
 }
 
 exports.changeData = async (request) => {

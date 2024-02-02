@@ -1,0 +1,59 @@
+.modal-wrapper {
+    position: fixed;
+    left:0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: rgba(230, 226, 226, 0.804);
+  }
+
+  .add-modal{
+    display: flex;
+    justify-content: center;
+   align-items: center;
+  }
+
+  .add-form{
+    position: fixed;
+    bottom: 27vh;
+    background-color: #fff;
+    border-radius: 10px;
+    width: 35vw;
+    height: 48vh;
+  }
+  .add-form>form {
+    
+    height: 45vh;
+    margin-left: 8vw ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+
+  .add-form> form> input{
+    width: 15vw;
+    height: 3vh;
+
+  }
+
+  .save-btn{
+    padding: 9px;
+    width: 100px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #3b82f5;
+    border-color: #3b82f5 ;
+    margin: 10px;
+  }
+
+  .cancel-btn {
+    padding: 9px;
+    width: 100px;
+    font-size: 18px;
+    border-radius: 10px;
+    color: #fff;
+    background-color: black;
+    margin: 10px;
+  }

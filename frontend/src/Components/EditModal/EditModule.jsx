@@ -1,43 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../App.css";
+import "./EditModal.css";
 
-const EditModule = ({ hide }, info) => {
+const EditModule = ({ hide ,info}) => {
   // const [data, setData] = useState([]);
-  const [id, setId] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState(null);
-  const [location, setLocation] = useState("");
+  const [uid, setUId] = useState(info._id);
+  const [name, setName] = useState(info.name);
+  const [email, setEmail] = useState(info.email);
+  const [gender, setGender] = useState(info.gender);
+  const [age, setAge] = useState(info.age);
+  const [location, setLocation] = useState(info.location);
 
   console.log(info);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await axios.get("http://localhost:8080/api/users");
-  //     // setData(result.data);
-  //     console.log(result);
-  //   };
-  //   fetchData();
-  // }, []);
+  console.log(uid)
 
-  // data?.map((item) => {
-  //     setName(item.name);
-  //     setEmail(item.email);
-  //     setAge(item.age)
-  //     setLocation(item.location);
-  // })
-  // console.log(data)
-
-  // useEffect(() => {
-  //     const fetchData = async () => {
-  //         const result = await axios.put("http://localhost:8080/api/users", {name, email, age, gender, location});
-  //         console.log(result);
-  //       };
-  // }, []);
-
-  const handleSubmit = async (id) => {
-    const result = await axios.put(`http://localhost:8080/api/users${id}`, {
+  const handleSubmit = async () => {
+    const result = await axios.put(`http://localhost:8080/api/users/${uid}`, {
       name,
       email,
       age,
@@ -67,12 +45,10 @@ const EditModule = ({ hide }, info) => {
           <div>
             <label htmlFor="email">Email: </label>
             <input
+            readOnly
               type="email"
               name="email"
               value={email}
-              placeholder="Enter Email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
             />
           </div>
 
@@ -116,9 +92,9 @@ const EditModule = ({ hide }, info) => {
           <div>
             <button
               className="edit-save-btn"
-              onClick={(item) => {
+              onClick={() => {
                 hide();
-                handleSubmit(item._id);
+                handleSubmit(uid);
                 
               }}
             >
