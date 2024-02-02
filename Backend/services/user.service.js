@@ -15,24 +15,15 @@ exports.createData = async(payload)=>{
 
 exports.findData = async (request) => {
         console.log(request.query)
-        const users = await Users.find({})
         let page = Number(request.query.page) || 1;
-        let limit = Number(request.query.limit) || 1;
-        let startIndex = (page-1)*limit;
-        let endIndex = page * limit
+        let limit = Number(request.query.limit) || 3;
+        const users = await Users.find({})
+        .skip(limit * page)
+        .limit(limit)
+        .countDocuments()
+    
 
-        if{endIndex < users.length}{const results = {}
-        results.next ={
-            page: page+1,
-            limit: limit
-        }}
-        const previous = {}
-        previous.next ={
-            page: page+1,
-            limit: limit
-        }
-        results.results = users.slice(startIndex, endIndex);
-        return results;
+        return users;
 }
 
 exports.changeData = async (request) => {
