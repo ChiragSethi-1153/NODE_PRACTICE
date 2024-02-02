@@ -1,6 +1,6 @@
 
 const Users = require('../Models/Users')
-
+require('mongoose-paginate')
 exports.createData = async(payload)=>{
     const {name, email, age, gender, location} = payload;
     try {
@@ -13,9 +13,26 @@ exports.createData = async(payload)=>{
     }
 }
 
-exports.findData = async () => {
+exports.findData = async (request) => {
+        console.log(request.query)
         const users = await Users.find({})
-        return users;
+        let page = Number(request.query.page) || 1;
+        let limit = Number(request.query.limit) || 1;
+        let startIndex = (page-1)*limit;
+        let endIndex = page * limit
+
+        if{endIndex < users.length}{const results = {}
+        results.next ={
+            page: page+1,
+            limit: limit
+        }}
+        const previous = {}
+        previous.next ={
+            page: page+1,
+            limit: limit
+        }
+        results.results = users.slice(startIndex, endIndex);
+        return results;
 }
 
 exports.changeData = async (request) => {

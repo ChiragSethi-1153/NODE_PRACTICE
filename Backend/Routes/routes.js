@@ -3,6 +3,8 @@ const { getData, addData, updateData, removeData } = require("../Controller/Cont
 
 const router= require("express").Router();
 
+
+
 router.post("/", addData );
 router.get("/", getData);
 router.put("/:id", updateData)

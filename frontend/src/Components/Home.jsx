@@ -16,14 +16,18 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(5)
 
+  const [showEdit, setShowEdit] = useState(true)
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get("http://localhost:8080/api/users" );
       setData(result.data);
       setLoading(false)
-      console.log(result);
+      // console.log(result);
+      {<EditModule info={data} />}
     };
     fetchData();
+    
   }, []);
 
   const indexOfFirstRecord = currentPage * recordsPerPage; 
@@ -40,7 +44,9 @@ const Home = () => {
     navigate('/add')
   }
 
-
+const handleEdit = () => {
+  setShowEdit(false)
+}
 
 const handleDelete = async (id) => {
   // console.log("object")
@@ -68,10 +74,14 @@ const handleDelete = async (id) => {
               <tr>
                 <td style={{ border: '1px solid black' }} ></td>
                 <td style={{ border: '1px solid black', cursor: 'pointer' }} onClick={handleClick}>{item.name}</td>
-                <td><button 
-                onClick={() => {
-                //  <EditModule item_name={item.name} item_email={item.email} item_age={item.age} item_gender={item.gender} item_location={item.location} />
-                  navigate('/edit')}}>edit</button></td>
+                <td>
+                  <button 
+                    onClick={() => setShowEdit(true)}
+                  >
+                  edit
+                  </button>
+                </td>
+               
                 <td><button onClick={() => handleDelete(item._id)}>delete</button></td>
               </tr>
             )
@@ -79,7 +89,7 @@ const handleDelete = async (id) => {
         }
         </tbody>
       </table>
-
+      {showEdit && <EditModule hide={handleEdit} />}
       <Pagination nPages={nPages}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage} />

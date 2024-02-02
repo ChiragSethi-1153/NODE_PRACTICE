@@ -13,8 +13,9 @@ exports.addData =  async(req, res) => {
 
     }
 
-
+//.skip(skip).limit(limit)
 exports.getData =  async(req, res) => { 
+    
     try{
         const response = await findData(req);
         return res.status(200).json(response)
